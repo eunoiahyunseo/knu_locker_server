@@ -1,0 +1,50 @@
+<div id="top_bar">
+  <a id="title" href="/">경북대학교 사물함</a>
+  <div id="menu_container">
+    <div class="top_menu">
+      <div class="menu_name" style="border:none;">
+        <a href="/apply/">신청</a>
+      </div>
+    </div>
+    <div class="top_menu" style="left:-5px;">
+      <div class="menu_name">
+        <a href="/search/">조회</a>
+      </div>
+    </div>
+    <div class="top_menu" style="left:-10px;">
+      <div class="menu_name">사물함 정보</div>
+      <div class="detail_menu">
+        <a href="/locker/?floor=-1">지하1층</a>
+        <a href="/locker/?floor=1">1층</a>
+        <a href="/locker/?floor=3">3층</a>
+      </div>
+    </div>
+  </div>
+  <form id="search" action="/search/" method="post" onsubmit="return gksdud();">
+    <input type="text" id="menu_search" name="search" placeholder="검색"/>
+    <button id="search_icon" type="submit"></button>
+    <span id="small_search"></span>
+    <span id="search_icon_close" class="material-icons">close</span>
+  </form>
+</div>
+<script>
+  function gksdud(){
+    var $ms=$('#menu_search');
+    var engreg = /^[a-zA-Z]*$/;
+    var hanreg = /^[가-힣]{1,6}$/;
+    if(engreg.test($ms.val())) {
+      $ms.val(AtoH.convert($ms.val()));
+    }
+    if(!hanreg.test($ms.val())){
+      alert('검색은 6글자 이하의 한글만 가능합니다!');
+      return false;
+    }
+    return true;
+  }
+  $("#small_search").on('click', function() {
+    $("#search").addClass('on');
+  });
+  $("#search_icon_close").on('click', function() {
+    $("#search").removeClass('on');
+  });
+</script>
